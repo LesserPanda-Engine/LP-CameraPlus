@@ -39,15 +39,18 @@ game.module(
     addTo: function(container) {
       this.container = container;
 
-      this.setPosition(0, 0);
+      this.setPosition(game.system.width * 0.5, game.system.height * 0.5);
 
       return this;
     },
     setPosition: function(x, y) {
+      var x = x || 0;
+      var y = y || 0;
+
       // Save new position
       this.position.set(x, y);
 
-      // Update offset to rendering canvas center
+      // Update offset to center of rendering canvas
       this._positionOffset.copy(this.offset).add(game.system.width * 0.5, game.system.height * 0.5);
       this.container.position.copy(this._positionOffset);
 
@@ -56,21 +59,17 @@ game.module(
     },
     setRotation: function(rotation) {
       // Save new rotation
-      this.rotation = rotation;
+      this.rotation = rotation || 0;
 
-      // Change container rotation
+      // Rotate container
       this.container.rotation = -rotation;
     },
     setScale: function(newScale) {
-      // Update offset of
-      this._scaleOffset.subtract(this._positionOffset)
-        .multiply(newScale / this.scale)
-        .add(this._positionOffset);
+      // Save new scale
+      this.scale = newScale || 1;
 
-      this.scale = newScale;
-
-      this.container.scale.set(newScale, newScale);
-      this.container.position.copy(this._scaleOffset);
+      // Scale container
+      this.container.scale.set(this.scale, this.scale);
     }
   });
 
@@ -101,9 +100,40 @@ game.module(
       }
 
       var c = new Camera().addTo(entLayer);
-      c.setPosition();
+      // c.setPosition();
+      // c.setPosition(100, 100);
+      // c.setPosition(game.system.width * 0.5, game.system.height * 0.5);
       // c.setRotation(-Math.PI * 0.25);
+      // c.setScale(1);
+      // c.setScale(1.2);
       // c.setScale(2);
+
+      new game.Tween({ s: 1 }).to({ s: 2 }, 1000)
+        .onUpdate(function(value) {
+          c.setPosition(value * game.system.width, game.system.height * 0.5);
+        })
+        .start();
+      new game.Tween({ s: 1 }).to({ s: 2 }, 1000)
+        .delay(2000)
+        .onUpdate(function(value) {
+          c.setPosition((1 - value) * game.system.width, game.system.height * 0.5);
+        })
+        .start();
+
+      new game.Tween({ s: 1 }).to({ s: 2 }, 2000)
+        .onUpdate(function(value) {
+          c.setScale(value * 2);
+          // c.setRotation(value * Math.PI * 4);
+        })
+        .start();
+
+      new game.Tween({ s: 1 }).to({ s: 2 }, 2000)
+        .delay(2000)
+        .onUpdate(function(value) {
+          c.setScale((1 - value) * 2);
+          // c.setRotation(value * Math.PI * 4);
+        })
+        .start();
     }
   });
 
