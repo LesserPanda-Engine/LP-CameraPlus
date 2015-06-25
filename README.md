@@ -1,5 +1,12 @@
-# Mad Camera Example
+# Mad Camera
 
-## Usage
+A simpler camera plugin for Panda Engine, which only provides some basic
+functionalities. You need to manually implement target following, lerping
+and any other useful features.
 
-Simple open a server and open `index.html`.
+## Features
+
+- Set position
+- Set rotation
+- Set scale
+- Set center offset
