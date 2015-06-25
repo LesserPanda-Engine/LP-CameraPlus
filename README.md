@@ -1,9 +1,5 @@
-# Mad Camera
+# Mad Camera Example
 
-A better camera plugin for Panda Engine.
+## Usage
 
-## Features
-
-- Zoom in/out
-- Shake
-- Flash
+Simple open a server and open `index.html`.
