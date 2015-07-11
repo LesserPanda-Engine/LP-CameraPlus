@@ -1,12 +1,8 @@
-# Mad Camera
+# Camera Extension
 
-A simpler camera plugin for Panda Engine, which only provides some basic
-functionalities. You need to manually implement target following, lerping
-and any other useful features.
+A simpler camera extension plugin for Panda Engine.
 
 ## Features
 
-- Set position
-- Set rotation
-- Set scale
-- Set center offset
+- Zoom
+- Shake
