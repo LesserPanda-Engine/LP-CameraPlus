@@ -13,12 +13,14 @@ game.module(
       this.super(x, y);
       this._shakeOffset = new game.Point();
     },
-    zoomIn: function(s, time) {
-      var scale = this.container.scale.clone().multiply(s);
+    zoom: function(s, time, easing) {
       new game.Tween(this.container.scale)
-        .to(scale, time)
-        .easing(game.Tween.Easing.Cubic.Out)
+        .to(s, time)
+        .easing(easing || game.Tween.Easing.Cubic.Out)
         .start();
+    },
+    zoomBy: function(s, time, easing) {
+      this.zoom(this.container.scale.clone().multiply(s), time, easing);
     },
     moveCamera: function() {
       this.speed.x = (this.position.x - this.sensorPosition.x + this.offset.x).limit(-this.maxSpeed, this.maxSpeed);
