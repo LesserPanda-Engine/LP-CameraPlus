@@ -1,5 +1,5 @@
 game.module(
-  'plugins.camera-ext'
+  'plugins.camera'
 )
 .body(function() { 'use strict';
 
@@ -11,7 +11,7 @@ game.module(
     _shakeBetween: -1,
     init: function(x, y) {
       this.super(x, y);
-      this._shakeOffset = new game.Point();
+      this._shakeOffset = new game.Vector();
     },
     zoom: function(s, time, easing) {
       new game.Tween(this.container.scale)
@@ -59,10 +59,22 @@ game.module(
         }
       }
 
-      this.container.pivot.copy(this.target.position)
-        .multiply(this.container.scale.x - 1, this.container.scale.y - 1)
-        .divide(this.container.scale)
-        .add(this._shakeOffset);
+      if (this.container) {
+        this.container.position.x = -(this.rounding ? (this.position.x + 0.5) | 0 : this.position.x);
+        this.container.position.y = -(this.rounding ? (this.position.y + 0.5) | 0 : this.position.y);
+
+        // Fix position if canvas is resized
+        this.container.position.subtract(
+          (game.system.width - game.System.width) * 0.5,
+          (game.system.height - game.System.height) * 0.5
+        );
+
+        // Move camera
+        this.container.pivot.copy(this.target.position)
+          .multiply(this.container.scale.x - 1, this.container.scale.y - 1)
+          .divide(this.container.scale)
+          .add(this._shakeOffset);
+      }
     },
 
     /**
