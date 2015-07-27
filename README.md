@@ -1,6 +1,7 @@
 # Camera Extension
 
-A simpler camera extension plugin for Panda Engine.
+A simpler camera extension plugin for LesserPanda and Panda Engine.
+The one capable with Panda engine is in the `panda-engine` branch.
 
 ## Features
 
