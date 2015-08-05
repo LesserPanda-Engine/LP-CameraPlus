@@ -4,7 +4,7 @@
  * @author Sean Bohan
  */
 game.module(
-  'plugins.camera'
+  'plugins.camera-plus'
 )
 .body(function() { 'use strict';
 
