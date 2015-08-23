@@ -20,12 +20,12 @@ game.module(
     },
     zoom: function(s, time, easing) {
       new game.Tween(this.container.scale)
-        .to(s, time)
+        .to({ x: s, y: s }, time)
         .easing(easing || game.Tween.Easing.Cubic.Out)
         .start();
     },
     zoomBy: function(s, time, easing) {
-      this.zoom(this.container.scale.clone().scale(s), time, easing);
+      this.zoom(this.container.scale.x * s, time, easing);
     },
     moveCamera: function() {
       this.speed.x = (this.position.x - this.sensorPosition.x + this.offset.x).limit(-this.maxSpeed, this.maxSpeed);
@@ -76,7 +76,7 @@ game.module(
 
         // Move camera
         this.container.pivot.copy(this.target.position)
-          .scale(this.container.scale.x - 1, this.container.scale.y - 1)
+          .multiply(this.container.scale.x - 1, this.container.scale.y - 1)
           .divide(this.container.scale)
           .add(this._shakeOffset);
       }
