@@ -1,7 +1,7 @@
-# Camera Extension
+# Camera Extension (Deprecated)
 
-A simple camera extension for LesserPanda. Not stable yet but ready
-for use (APIs may change frequently).
+This is deprecated since all functionalities are merged
+into LesserPanda engine.
 
 ## Features
 
